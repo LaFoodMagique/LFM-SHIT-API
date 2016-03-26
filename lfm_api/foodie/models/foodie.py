@@ -120,7 +120,7 @@ class Foodie(AbstractBaseUser):
     @property
     def is_admin(self):
         return False
-    
+
     # Class functions
     def get_username(self):
         if not self.username:
