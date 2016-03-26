@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 # Model imports
-from users.models import Foodie
+from foodie.models import Foodie
 
 
 #
