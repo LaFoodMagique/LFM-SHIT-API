@@ -103,8 +103,8 @@ class Foodie(AbstractBaseUser):
         verbose_name = 'foodie'
         verbose_name_plural = 'foodies'
 
-    #USERNAME_FIELD = 'email'
-    #REQUIRED_FIELDS = ['password', 'first_name', 'last_name', 'phone_number', 'address_part_1']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['password', 'first_name', 'last_name', 'phone_number', 'address_part_1']
 
     def has_perm(self, perm, obj=None):
         return False
