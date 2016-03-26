@@ -37,10 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'foodie',
 ]
 
 AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    #'foodie.backends.FoodieBackEnd',
+    #'restaurant.backends.RestaurantBackEnd',
 ]
 
 MIDDLEWARE_CLASSES = [
