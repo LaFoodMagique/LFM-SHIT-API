@@ -30,18 +30,26 @@ class Foodie(AbstractBaseUser):
 
     first_name = models.CharField(
         max_length=32,
+        error_messages={
+            'max_length': ''
+        },
         help_text=''
     )
 
     last_name = models.CharField(
         max_length=32,
+        error_messages={
+            'max_length': ''
+        },
         help_text=''
     )
 
     phone_number = models.CharField(
+        unique=True,
         max_length=16,
         error_messages={
-            'unique': 'This phone number is already used by another user.'
+            'unique': 'This phone number is already used by another user.',
+            'max_length': ''
         },
         help_text=''
     )
@@ -55,6 +63,9 @@ class Foodie(AbstractBaseUser):
 
     address_part_1 = models.CharField(
         max_length=128,
+        error_messages={
+            'max_length': ''
+        },
         help_text=''
     )
 
@@ -62,6 +73,9 @@ class Foodie(AbstractBaseUser):
         max_length=128,
         null=True,
         blank=True,
+        error_messages={
+            'max_length': ''
+        },
         help_text=''
     )
 
@@ -70,6 +84,9 @@ class Foodie(AbstractBaseUser):
         max_length=16,
         blank=True,
         null=True,
+        error_messages={
+            'max_length': ''
+        },
         help_text=''
     )
 
@@ -84,6 +101,9 @@ class Foodie(AbstractBaseUser):
         choices=GENDER_TYPES,
         blank=True,
         null=True,
+        error_messages={
+            'max_length': ''
+        },
         help_text=''
     )
 
