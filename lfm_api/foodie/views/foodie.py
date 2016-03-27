@@ -7,13 +7,12 @@ from rest_framework import (
 )
 
 # Serializer imports
-from foodie.serializers.foodie import (
+from foodie.serializers import (
     FoodieListSerializer, FoodieDetailSerializer,
     FoodieUpdateSerializer, FoodieCreateSerializer
 )
 
 # Model imports
-#from foodie.models.foodie import Foodie
 from foodie import models, commons
 
 
@@ -42,7 +41,7 @@ class FoodieViews(viewsets.ViewSet):
     def update(self, request, pk=None, format=None):
         foodie = get_object_or_404(self.queryset, pk=pk)
 
-        if part_of(request.user, [foodie]) is False:
+        if commons.part_of(request.user, [foodie]) is False:
             return response.Response(commons.to_json('message', 'Request not permitted'), status=status.HTTP_403_FORBIDDEN)
 
         serializer = FoodieUpdateSerializer(foodie, data=request.data, partial=True)
@@ -61,7 +60,7 @@ class FoodieViews(viewsets.ViewSet):
     def delete(self, request, pk=None, format=None):
         foodie = get_object_or_404(self.queryset, pk=pk)
 
-        if part_of(request.user, [foodie]) is False:
+        if commons.part_of(request.user, [foodie]) is False:
             return response.Response(commons.to_json('message', 'Request not permitted'), status=status.HTTP_403_FORBIDDEN)
 
         foodie.is_active = False

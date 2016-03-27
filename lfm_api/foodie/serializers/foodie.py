@@ -2,7 +2,7 @@
 from rest_framework import serializers
 
 # Model imports
-from foodie.models.foodie import Foodie
+from foodie.models import Foodie
 
 
 #
@@ -84,12 +84,11 @@ class FoodieCreateSerializer(serializers.HyperlinkedModelSerializer):
             'username', 'birth_date', 'gender'
         )
 
-    def create(self, instance, data):
-        for field, value in data.items():
-            if field == 'password':
-                instance.set_password(value)
-            else:
-                setattr(instance, field, value)
+    def create(self, data):
+        password = data.pop('password', None)
+        instance = self.Meta.model(**data)
+        if password is not None:
+            instance.set_password(password)
         instance.save()
         return instance
 

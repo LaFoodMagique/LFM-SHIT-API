@@ -2,7 +2,7 @@
 from django.conf.urls import url
 
 # View imports
-from .views.foodie import FoodieViews
+from .views import FoodieViews
 
 
 #
