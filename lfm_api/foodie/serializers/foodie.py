@@ -76,7 +76,6 @@ class FoodieCreateSerializer(serializers.HyperlinkedModelSerializer):
     """
     """
 
-
     class Meta:
         model = Foodie
         fields = (
@@ -86,7 +85,7 @@ class FoodieCreateSerializer(serializers.HyperlinkedModelSerializer):
         )
 
     def create(self, instance, data):
-        for field, value in data.item():
+        for field, value in data.items():
             if field == 'password':
                 instance.set_password(value)
             else:
