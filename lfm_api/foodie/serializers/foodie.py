@@ -12,7 +12,7 @@ from foodie.models import Foodie
 class FoodieListSerializer(serializers.HyperlinkedModelSerializer):
     """
     """
-    url = serializers.HyperlinkedIdentityField(view_name='foodie:info')
+    url = serializers.HyperlinkedIdentityField(view_name='foodie:detail')
     full_name = serializers.CharField(source='get_full_name', read_only=True)
 
     class Meta:
@@ -91,6 +91,7 @@ class FoodieCreateSerializer(serializers.HyperlinkedModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
 
 #
 # Delete
