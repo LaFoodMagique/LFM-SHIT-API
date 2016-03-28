@@ -26,11 +26,10 @@ class FoodieViews(viewsets.ViewSet):
     queryset = models.Foodie.objects.all()
 
     def list(self, request, format=None):
-        obj = get_object_or_404(self.queryset, pk=request.user.pk)
-        serializer = FoodieListSerializer(obj, context=commons.to_json('request', request))
+        serializer = FoodieListSerializer(self.queryset, context=commons.to_json('request', request), many=True)
         return response.Response(serializer.data)
 
-        return response.Response(commons.to_json('message', 'Not implemented yet'), status=status.HTTP_200_OK)
+        # return response.Response(commons.to_json('message', 'Not implemented yet'), status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None, format=None):
         obj = get_object_or_404(self.queryset, pk=pk)
