@@ -20,5 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^foodie/', include('foodie.urls', namespace='foodie')),
-    # url(r'^restaurant/', include('restaurant.urls', namespace='restaurant')),
+    url(r'^restaurant/', include('restaurant.urls', namespace='restaurant')),
 ]
