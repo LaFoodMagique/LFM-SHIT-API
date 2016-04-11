@@ -37,7 +37,7 @@ class RestaurantViews(viewsets.ViewSet):
         obj = get_object_or_404(self.queryset, pk=pk)
 
         serializer = RestaurantDetailSerializer(obj)
-        return response.Response(serializer.data)
+        return response.Response(serializer.data, status=status.HTTP_200_OK)
 
     def update(self, request, pk=None, format=None):
         obj = get_object_or_404(self.queryset, pk=pk)
@@ -66,4 +66,34 @@ class RestaurantViews(viewsets.ViewSet):
 
         obj.is_active = False
         obj.save()
-        return response.Response(commons.to_json('message', 'Restaurant desactivated'), status=status.HTTP_200_OK)
+        return response.Response(commons.to_json('message', 'Restaurant account desactivated'), status=status.HTTP_200_OK)
+
+
+
+class ProfileRestaurantViews(viewsets.ViewSet):
+    """
+    """
+
+    queryset = models.Restaurant.objects.all()
+
+    def retrieve(self, request, format=None):
+        obj = get_object_or_404(self.queryset, pk=request.user.pk)
+
+        serializer = RestaurantDetailSerializer(obj)
+        return response.Response(serializer.data, status=status.HTTP_200_OK)
+
+    def update(self, request, format=None):
+        obj = get_object_or_404(self.queryset, pk=request.user.pk)
+
+        serializer = RestaurantUpdateSerializer(obj, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return response.Response(commons.to_json('message', 'Restaurant updated'), status=status.HTTP_200_OK)
+        return response.Response(commons.to_json('message', 'Missing or bad parameters'), status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, format=None):
+        obj = get_object_or_404(self.queryset, pk=request.user.pk)
+
+        obj.is_active = False
+        obj.save()
+        return response.Response(commons.to_json('message', 'Restaurant account desactivated'), status=status.HTTP_200_OK)
