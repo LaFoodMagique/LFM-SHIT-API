@@ -1,7 +1,7 @@
 # Django imports
 from django.shortcuts import get_object_or_404
 
-# rest_framework
+# Rest_framework imports
 from rest_framework import (
     mixins, viewsets, status, response
 )
@@ -35,7 +35,7 @@ class FoodieViews(viewsets.ViewSet):
         obj = get_object_or_404(self.queryset, pk=pk)
 
         serializer = FoodieDetailSerializer(obj)
-        return response.Response(serializer.data)
+        return response.Response(serializer.data, status=status.HTTP_200_OK)
 
     def update(self, request, pk=None, format=None):
         obj = get_object_or_404(self.queryset, pk=pk)
@@ -64,4 +64,33 @@ class FoodieViews(viewsets.ViewSet):
 
         obj.is_active = False
         obj.save()
-        return response.Response(commons.to_json('message', 'Foodie desactivated'), status=status.HTTP_200_OK)
+        return response.Response(commons.to_json('message', 'Foodie account desactivated'), status=status.HTTP_200_OK)
+
+
+class ProfileFoodieViews(viewsets.ViewSet):
+    """
+    """
+
+    queryset = models.Foodie.objects.all()
+
+    def retrieve(self, request, format=None):
+        obj = get_object_or_404(self.queryset, pk=request.user.pk)
+
+        serializer = FoodieDetailSerializer(obj)
+        return response.Response(serializer.data, status=status.HTTP_200_OK)
+
+    def update(self, request, format=None):
+        obj = get_object_or_404(self.queryset, pk=request.user.pk)
+
+        serializer = FoodieUpdateSerializer(obj, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return response.Response(commons.to_json('message', 'Foodie updated'), status=status.HTTP_200_OK)
+        return response.Response(commons.to_json('message', 'Missing or bad parameters'), status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, format=None):
+        obj = get_object_or_404(self.queryset, pk=request.user.pk)
+
+        obj.is_active = False
+        obj.save()
+        return response.Response(commons.to_json('message', 'Foodie account desactivated'), status=status.HTTP_200_OK)
