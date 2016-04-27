@@ -20,7 +20,7 @@ from foodie import commons
 def foodie_login(request):
     if request.method == 'POST':
         try:
-            user = django_auth(email=request.POST.get('email'), password=request.POST.get'password')
+            user = django_auth(email=request.POST.get('email'), password=request.POST.get('password'))
             if user is not None:
                 if user.is_active:
                     django_login(request, user)
