@@ -17,10 +17,10 @@ from foodie import commons
 # Views
 #
 
-def login(request):
+def foodie_login(request):
     if request.method == 'POST':
         try:
-            user = django_auth(email=request.POST['email'], password=request.POST['password'])
+            user = django_auth(email=request.POST.get('email'), password=request.POST.get'password')
             if user is not None:
                 if user.is_active:
                     django_login(request, user)
@@ -30,12 +30,12 @@ def login(request):
             else:
                 return response.Response(commons.to_json('message', 'The user doesn\'t exist.'), status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
-            return response.Response(commons.to_json('message', 'Error in the request'), status=status.HTTP_400_BAD_REQUEST)
+            return response.Response(commons.to_json('message', '%s' % (e)), status=status.HTTP_400_BAD_REQUEST)
     else:
         return response.Response(commons.to_json('message', 'This type of request are not allowed'), status=status.HTTP_400_BAD_REQUEST)
 
 
-def logout(request):
+def foodie_logout(request):
     if request.method == 'POST':
         django_logout(request)
         return response.Response(commons.to_json('message', 'You are now logout.'), status=status.HTTP_200_OK)
