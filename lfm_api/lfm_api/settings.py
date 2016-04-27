@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    #'foodie.backends.FoodieBackEnd',
+    'foodie.backend.FoodieBackEnd',
     #'restaurant.backends.RestaurantBackEnd',
 ]
 
