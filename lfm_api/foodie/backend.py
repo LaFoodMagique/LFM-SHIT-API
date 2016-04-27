@@ -12,7 +12,7 @@ class FoodieBackEnd(object):
 
     def authenticate(self, email=None, password=None):
         try:
-            user = Foodie.object.get(email=email)
+            user = Foodie.objects.get(email=email)
             if user.check_password(password):
                 return user
         except Foodie.DoestNotExist:
@@ -20,7 +20,7 @@ class FoodieBackEnd(object):
 
     def get_user(self, user_id):
         try:
-            user = Foodie.object.get(pk=user_id)
+            user = Foodie.objects.get(pk=user_id)
             if user.is_active:
                 return user
         except Foodie.DoestNotExist:
