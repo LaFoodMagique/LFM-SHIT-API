@@ -32,7 +32,7 @@ def login(request):
         except Exception as e:
             return response.Response(commons.to_json('message', 'Error in the request'), status=status.HTTP_400_BAD_REQUEST)
     else:
-        return response.Response(commons.to_json('message': 'This type of request are not allowed'), status=status.HTTP_400_BAD_REQUEST)
+        return response.Response(commons.to_json('message', 'This type of request are not allowed'), status=status.HTTP_400_BAD_REQUEST)
 
 
 def logout(request):
@@ -40,4 +40,4 @@ def logout(request):
         django_logout(request)
         return response.Response(commons.to_json('message', 'You are now logout.'), status=status.HTTP_200_OK)
     else:
-        return response.Response(commons.to_json('message': 'This type of request are not allowed'), status=status.HTTP_400_BAD_REQUEST)
+        return response.Response(commons.to_json('message', 'This type of request are not allowed'), status=status.HTTP_400_BAD_REQUEST)
