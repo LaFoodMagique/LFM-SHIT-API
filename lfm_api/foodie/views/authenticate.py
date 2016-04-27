@@ -8,7 +8,7 @@ from django.contrib.auth import (
 )
 
 # rest_framework imports
-from rest_framework import response, status
+from rest_framework import response, status, decorators
 
 # Model imports
 from foodie import commons
@@ -17,6 +17,7 @@ from foodie import commons
 # Views
 #
 
+@decorators.api_view(['POST'])
 def foodie_login(request):
     if request.method == 'POST':
         try:
@@ -34,7 +35,7 @@ def foodie_login(request):
     else:
         return response.Response(commons.to_json('message', 'This type of request are not allowed'), status=status.HTTP_400_BAD_REQUEST)
 
-
+@decorators.api_view(['POST'])
 def foodie_logout(request):
     if request.method == 'POST':
         django_logout(request)
