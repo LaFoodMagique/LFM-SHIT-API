@@ -10,8 +10,8 @@ from .views import FoodieViews, ProfileFoodieViews, login, logout
 #
 
 urlpatterns = [
-    #url(r'^auth/login/$', login, name='login'),
-    #url(r'^auth/logout/$', logout, name='logout'),
+    url(r'^auth/login/$', login, name='login'),
+    url(r'^auth/logout/$', logout, name='logout'),
     url(r'^auth/register/$', FoodieViews.as_view({'post': 'create'}), name='register'),
 
     url(r'^profile/$', ProfileFoodieViews.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'delete'}), name='profile'),
