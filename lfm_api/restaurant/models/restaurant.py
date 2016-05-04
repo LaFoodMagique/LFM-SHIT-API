@@ -58,6 +58,9 @@ class Restaurant(BaseUser):
 
     REQUIRED_FIELDS = ['name']
 
+    def __type__(self):
+        return "Restaurant"
+
     # Class properties
 
     # Class functions

@@ -97,6 +97,9 @@ class Foodie(BaseUser):
 
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
+    def __type__(self):
+        return "Foodie"
+
     #
     # Class properties
     #
