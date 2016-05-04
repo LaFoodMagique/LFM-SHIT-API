@@ -5,7 +5,7 @@
 #
 
 remove_migration() {
-    rm -f ./*/migrations/*_initial.py
+    rm -f ./*/migrations/0*_*.py
     echo 'Migration files are now removed.'
 }
 
