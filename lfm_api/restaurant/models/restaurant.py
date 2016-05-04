@@ -3,7 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 # Model imports
-from user.models import BaseUser
+from base_user.models import BaseUser
 
 
 #
