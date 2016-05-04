@@ -50,14 +50,14 @@ class FoodieViews(viewsets.ViewSet):
         if serializer.is_valid():
             serializer.save()
             return response.Response(json.dumps({"message": "Foodie updated"}), status=status.HTTP_200_OK)
-        return response.Response(json.dumps({"message": "Missing or bad parameters"}), status=status.HTTP_400_BAD_REQUEST)
+        return response.Response(json.dumps({"message": "%s" % (serializer.errors)}), status=status.HTTP_400_BAD_REQUEST)
 
     def create(self, request, format=None):
         serializer = FoodieCreateSerializer(data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return response.Response(json.dumps({"message", "Foodie created"}), status=status.HTTP_200_OK)
-        return response.Response(json.dumps({"message": "Missing or bad parameters"}), status=status.HTTP_400_BAD_REQUEST)
+        return response.Response(json.dumps({"message": "%s" % (serializer.errors)}), status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk=None, format=None):
         obj = get_object_or_404(self.queryset, pk=pk)
@@ -89,7 +89,7 @@ class ProfileFoodieViews(viewsets.ViewSet):
         if serializer.is_valid():
             serializer.save()
             return response.Response(json.dumps({"message": "Foodie updated"}), status=status.HTTP_200_OK)
-        return response.Response(json.dumps({"message": "Missing or bad parameters"}), status=status.HTTP_400_BAD_REQUEST)
+        return response.Response(json.dumps({"message": "%s" % (serializer.errors)}), status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, format=None):
         obj = get_object_or_404(self.queryset, pk=request.user.pk)
