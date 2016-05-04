@@ -53,7 +53,7 @@ class FoodieViews(viewsets.ViewSet):
         return response.Response(json.dumps({"message": "Missing or bad parameters"}), status=status.HTTP_400_BAD_REQUEST)
 
     def create(self, request, format=None):
-        serializer = FoodieCreateSerializer(data=request.data)
+        serializer = FoodieCreateSerializer(data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return response.Response(json.dumps({"message", "Foodie created"}), status=status.HTTP_200_OK)
