@@ -56,7 +56,7 @@ class FoodieViews(viewsets.ViewSet):
         serializer = FoodieCreateSerializer(data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return response.Response(json.dumps({"message", "Foodie created"}), status=status.HTTP_200_OK)
+            return response.Response(json.dumps({"message": "Foodie created"}), status=status.HTTP_200_OK)
         return response.Response(json.dumps({"message": "%s" % (serializer.errors)}), status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk=None, format=None):
