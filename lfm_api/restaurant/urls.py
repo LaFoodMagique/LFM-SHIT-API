@@ -2,7 +2,10 @@
 from django.conf.urls import url
 
 # View imports
-from .views import RestaurantViews, ProfileRestaurantViews
+from .views import (
+    RestaurantViews, ProfileRestaurantViews,
+    restaurant_login, restaurant_logout
+)
 
 
 #
@@ -10,8 +13,8 @@ from .views import RestaurantViews, ProfileRestaurantViews
 #
 
 urlpatterns = [
-    # url(r'^auth/login/$', ..., name='login'),
-    # url(r'^auth/logout/$', ..., name='logout'),
+    url(r'^auth/login/$', restaurant_login, name='login'),
+    url(r'^auth/logout/$', restaurant_logout, name='logout'),
     url(r'^auth/register/$', RestaurantViews.as_view({'post': 'create'}), name='register'),
 
     url(r'^profile/$', ProfileRestaurantViews.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'delete'}), name='profile'),

@@ -52,14 +52,14 @@ class RestaurantViews(viewsets.ViewSet):
         if serializer.is_valid():
             serializer.save()
             return response.Response(json.dumps({"message": "Restaurant updated"}), status=status.HTTP_200_OK)
-        return response.Response(json.dumps({"message": "Missing or bad parameters"}), status=status.HTTP_400_BAD_REQUEST)
+        return response.Response(json.dumps({"message": "%s" % (serializer.errors)}), status=status.HTTP_400_BAD_REQUEST)
 
     def create(self, request, format=None):
-        serializer = RestaurantCreateSerializer(data=request.data)
+        serializer = RestaurantCreateSerializer(data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return response.Response(json.dumps({"message": "Restaurant created"}), status=status.HTTP_200_OK)
-        return response.Response(json.dumps({"message": "Missing or bad parameters"}), status=status.HTTP_400_BAD_REQUEST)
+        return response.Response(json.dumps({"message": "%s" % (serializer.errors)}), status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk=None, format=None):
         obj = get_object_or_404(self.queryset, pk=pk)
@@ -92,7 +92,7 @@ class ProfileRestaurantViews(viewsets.ViewSet):
         if serializer.is_valid():
             serializer.save()
             return response.Response(json.dumps({"message": "Restaurant updated"}), status=status.HTTP_200_OK)
-        return response.Response(json.dumps({"message": "Missing or bad parameters"}), status=status.HTTP_400_BAD_REQUEST)
+        return response.Response(json.dumps({"message": "%s" % (serializer.errors)}), status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, format=None):
         obj = get_object_or_404(self.queryset, pk=request.user.pk)
