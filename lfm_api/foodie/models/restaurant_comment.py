@@ -41,7 +41,3 @@ class RestaurantComment(models.Model):
         default=timezone.now,
         help_text=''
     )
-
-    @property
-    def mark_average(self):
-        return 0
