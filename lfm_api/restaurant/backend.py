@@ -13,7 +13,7 @@ class RestaurantBackEnd(object):
     def authenticate(self, email=None, password=None):
         try:
             user = Restaurant.objects.get(email=email)
-            if user.check_password(password):
+            if user.check_password(password) and type(user) is Restaurant:
                 return user
         except Exception:
             return None
