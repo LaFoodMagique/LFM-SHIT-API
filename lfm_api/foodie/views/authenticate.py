@@ -41,6 +41,6 @@ def foodie_login(request):
 def foodie_logout(request):
     if request.method == 'POST':
         django_logout(request)
-        return response.Response(json.dumps({"message", "You are now logout."}), status=status.HTTP_200_OK)
+        return response.Response(json.dumps({"message": "You are now logout."}), status=status.HTTP_200_OK)
     else:
         return response.Response(json.dumps({"message": "This type of request are not allowed"}), status=status.HTTP_400_BAD_REQUEST)
