@@ -1,6 +1,4 @@
 # Django imports
-from django.shortcuts import render_to_response, redirect
-from django.template import RequestContext
 from django.contrib.auth import (
     login as django_login,
     authenticate as django_auth,
@@ -12,6 +10,7 @@ from rest_framework import response, status, decorators
 
 # Other imports
 import json
+
 
 #
 # Views

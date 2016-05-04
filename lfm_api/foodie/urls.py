@@ -2,7 +2,10 @@
 from django.conf.urls import url
 
 # View imports
-from .views import FoodieViews, ProfileFoodieViews, foodie_login, foodie_logout
+from .views import (
+    FoodieViews, ProfileFoodieViews,
+    foodie_login, foodie_logout
+)
 
 
 #
