@@ -77,7 +77,8 @@ class BaseUser(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password', 'phone_number', 'address_part_1']
 
-    def __type__(self):
+    @property
+    def type(self):
         return "BaseUser"
 
     def has_perm(self, perm, obj=None):
