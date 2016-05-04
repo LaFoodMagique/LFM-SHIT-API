@@ -15,7 +15,7 @@ class FoodieBackEnd(object):
             user = Foodie.objects.get(email=email)
             if user.check_password(password):
                 return user
-        except Foodie.DoestNotExist:
+        except Exception:
             return None
 
     def get_user(self, user_id):
@@ -23,5 +23,5 @@ class FoodieBackEnd(object):
             user = Foodie.objects.get(pk=user_id)
             if user.is_active:
                 return user
-        except Foodie.DoestNotExist:
+        except Exception:
             return None

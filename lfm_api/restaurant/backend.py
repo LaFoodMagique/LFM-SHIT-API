@@ -15,7 +15,7 @@ class RestaurantBackEnd(object):
             user = Restaurant.objects.get(email=email)
             if user.check_password(password):
                 return user
-        except Restaurant.DoestNotExist:
+        except Exception:
             return None
 
     def get_user(self, user_id):
@@ -23,5 +23,5 @@ class RestaurantBackEnd(object):
             user = Restaurant.objects.get(pk=user_id)
             if user.is_active:
                 return user
-        except Restaurant.DoestNotExist:
+        except Exception:
             return None
