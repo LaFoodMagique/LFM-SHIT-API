@@ -22,14 +22,14 @@ def foodie_login(request):
         try:
             data = json.loads(request.body.decode("utf-8"))
             user = django_auth(email=data["email"], password=data["password"])
-            if user is not None:
-                if user.is_active:
-                    django_login(request, user)
-                    return response.Response(json.dumps({"message": "You are now connected"}), status=status.HTTP_200_OK)
-                else:
-                    return response.Response(json.dumps({"message": "The user is not active."}), status=status.HTTP_401_UNAUTHORIZED)
-            else:
+            if user is None:
                 return response.Response(json.dumps({"message": "The user doesn\'t exist."}), status=status.HTTP_404_NOT_FOUND)
+            if user.is_active is False:
+                return response.Response(json.dumps({"message": "The user is not active."}), status=status.HTTP_401_UNAUTHORIZED)
+            if user.type is not "Foodie":
+                return response.Response(json.dumps({"message": "Bad authentication used"}), status=status.HTTP_400_BAD_REQUEST)
+            django_login(request, user)
+            return response.Response(json.dumps({"message": "You are now connected"}), status=status.HTTP_200_OK)
         except Exception as e:
             return response.Response(json.dumps({"message": "%s" % (e)}), status=status.HTTP_400_BAD_REQUEST)
     else:

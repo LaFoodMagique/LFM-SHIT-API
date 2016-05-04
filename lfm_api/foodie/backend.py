@@ -13,7 +13,7 @@ class FoodieBackEnd(object):
     def authenticate(self, email=None, password=None):
         try:
             user = Foodie.objects.get(email=email)
-            if user.check_password(password) and user.type is "Foodie":
+            if user.check_password(password):
                 return user
         except Exception:
             return None
